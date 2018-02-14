@@ -1,4 +1,7 @@
+from django.contrib.auth.models import Permission
 from django.contrib import admin
+admin.site.register(Permission)
+
 from .database import Participants, Issue, College, Users, Eventlist, ParticipantsAdmin
 
 admin.site.site_header = "Registration admin"
