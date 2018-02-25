@@ -1,0 +1,49 @@
+version: '2.0'
+services:
+  sql:
+    image: mysql
+    volumes: ["./data:/var/lib/mysql"]
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: incridea
+      MYSQL_USER: junaid
+      MYSQL_PASSWORD: junaid
+    networks:
+      admin:
+        ipv4_address: 10.10.10.2
+    # command: bash -c "ip -4 a"
+
+  web-build:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate"
+    depends_on:
+      - sql
+    networks:
+      admin:
+        ipv4_address: 10.10.10.3
+  web-shell:
+    build: .
+    command: bash
+    stdin_open: true
+    tty: true
+    depends_on:
+      - sql
+    networks:
+      admin:
+        ipv4_address: 10.10.10.3
+  web:
+    build: .
+    command: bash run.sh
+    ports: ["3000:5000"]
+    depends_on:
+      - sql
+    networks:
+      admin:
+        ipv4_address: 10.10.10.4
+networks:
+  admin:
+    driver: bridge
+    ipam:
+      config:  
+         - subnet: 10.10.10.0/20
+           gateway: 10.10.10.1

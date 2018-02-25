@@ -25,7 +25,7 @@ SECRET_KEY = '3ty_n3b7(^-b$3derlo1jh+sf0+$d1mp+2udfwkj@ermv+szh('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['159.89.175.3']
+ALLOWED_HOSTS = ['159.89.175.3', 'localhost']
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'incridea',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'HOST': '10.10.10.2',
         'PORT': '3306',
     }
 }
